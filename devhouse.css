@@ -1,1 +1,64 @@
 /* CSS declarations go here */
+body {text-align: center; font-size: 24px; font-family: "Trebuchet MS" Verdana, Arial; color: #606060; background: white;}
+body div div {margin-bottom: 10px;}
+div.pane {margin: 0px auto; width: 725px;}
+div.pane table {margin: 0px auto;}
+div.pane table input.textinput {width: 320px;}
+form {margin: 0px; padding: 0px;}
+img {border: none; vertical-align: middle; margin: 0px;}
+/*
+input {font-size: 20px; padding: 3px 5px;}
+input.text {width: 300px;}
+*/
+#header {margin: 40px; margin-bottom: 20px; height: 225px;}
+
+#container {padding-top:40px;}
+
+input, textarea {
+	font-family:Arial, Helvetica, sans-serif;
+	color:#404040;
+}
+label {
+	cursor:pointer;
+	font-family:"Trebuchet MS";
+	font-size: 36px;
+	color:#606060;
+	line-height:50px;
+}
+label.chosen {color:#333;}
+
+/*Text inputs*/
+.textinput, .textinputHovered {
+	height:84px;
+	cursor:pointer;
+	background:url(images/input_bg.gif) repeat-x left top;
+	border:none;
+	padding:12px 0;
+	text-align: center;
+	font-size: 64px;
+	font-family:"Trebuchet MS";
+	font-weight:bold;
+	vertical-align:middle;
+}
+.textinputHovered {background-position:left bottom;}
+.inputCorner {
+	padding-bottom:0;
+	vertical-align:middle;
+}
+
+/*Button*/
+.buttonSubmit, .buttonSubmitHovered {
+	width:auto;
+	height:88px;
+	color:#FFF;
+	font-weight:bold;
+	font-family: Helvetica;
+	font-size: 36px;
+	padding:2px;
+	margin-top:30px;
+	background:url(images/button_bg.jpg) repeat-x left top;
+	cursor:pointer;
+	border:none;
+}
+.buttonSubmitHovered {background-position:left bottom;}
+.buttonImg {vertical-align:bottom;}
