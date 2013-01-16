@@ -1,47 +1,61 @@
-Developer = new Meteor.Collection("developer");
+
+People = new Meteor.Collection("people");People
+Event = new Meteor.Collection("event");
 
 if (Meteor.isClient) {
-	Template.welcome.events = {
-		'click button.buttonSubmit' : function() {
-			alert("1")
-			var re = /^\s*[\w\-\+_]+(\.[\w\-\+_]+)*\@[\w\-\+_]+\.[\w\-\+_]+(\.[\w\-\+_]+)*\s*$/;
-			var email = $('#email')
-			if (!re.test(email.val())){
-				email.effect("shake", { times:3 }, 300);
-			}
-		}
-	};
-	
-//	Template.entryfield.events = {
-//			  "keydown #message": function(event){
-//			    if(event.which == 13){
-//			      // Submit the form
-//			      var name = document.getElementById('name');
-//			      var message = document.getElementById('message');
-//
-//			      if(name.value != '' && message.value != ''){
-//			        Messages.insert({
-//			          name: name.value,
-//			          message: message.value,
-//			          time: Date.now()
-//			        });
-//
-//			        name.value = '';
-//			        message.value = '';
-//			      }
-//			    }
-//			  }
-//			}
-	
-//  Template.hello.greeting = function () {
-//    return "Welcome to devhouse.";
-//  };
-//
-//  Template.hello.events({
-//    'click input' : function () {
-//      // template data, if any, is available in 'this'
-//      if (typeof console !== 'undefined')
-//        console.log("You pressed the button");
-//    }
-//  });
+  Template.Meetup.people = function () {
+    return People.find({}, {sort: {name: 1}});
+  };
+
+  Template.Meetup.email_exists = function () {
+    return Session.get("email");
+  };
+
+  Template.new_person.email_exists = function () {
+    return Session.get("email");
+  };
+
+  Template.new_person.events = {
+    'click input.add': function () {
+      Session.set("email", false);
+      var email = document.getElementById("email").value;
+      var re = /^\s*[\w\-\+_]+(\.[\w\-\+_]+)*\@[\w\-\+_]+\.[\w\-\+_]+(\.[\w\-\+_]+)*\s*$/;
+      if (!re.test(email)){
+        alert("invalid email format")
+        return
+      }
+      var person = People.findOne({email: email});
+      if (person){
+        alert("Thanks for showing up!")
+        Event.insert({player_id: person._id});
+        document.getElementById("email").value = '';
+      } else {
+        Session.set("email", true);
+      }
+    }, 
+    'click input.edit': function () {
+      Session.set("email", false);
+      document.getElementById("name").value = '';
+      document.getElementById("about").value = '';
+    }
+  };
+
+  Template.details.events = {
+    'click input.add': function () {
+      var email = document.getElementById("email").value;
+      var name = document.getElementById("name").value.trim();
+      var about = document.getElementById("about").value.trim();
+      if (name.length == 0){
+        alert("requires a name");
+        return;
+      }
+      var person = People.insert({email: email, name: name, about: about});
+      Event.insert({player_id: person._id});
+      document.getElementById("email").value = '';
+      document.getElementById("name").value = '';
+      document.getElementById("about").value = '';
+      Session.set("email", false);
+      alert("Thanks for showing up!");
+    }
+  };
 }

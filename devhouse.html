@@ -1,63 +1,63 @@
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>DevHouse, Welcome</title>
-<script type="text/javascript" src="prototype.js"></script>
-<script type="text/javascript" src="effects.js"></script>
+  <title>Meteor Meetup</title>
 </head>
+
 <body>
-    <div id="header"><img src="shdh_logo.gif" alt="SHDH" /></div>
-
-	{{> welcome}}
-
-	{{> initial}}
-
-	{{> thanks}}
-
+  <div id="outer">
+    {{> Meetup}}
+  </div>
 </body>
 
+<template name="Meetup">
 
-<template name="welcome">
-    <div id="welcome" class="pane">
-        <div>
-            <label for="email">Email:</label><br />
-            <img src="images/input_left.gif" alt="" /><input type="text" id="email" value="" class="textinput" autocomplete="off" /><img src="images/input_right.gif" alt="" />
-        </div>
-        <div><img src="images/button_left.jpg" alt="" class="buttonImg"/><button class="buttonSubmit">Get this party started!</button><img src="images/button_right.jpg" alt="" class="buttonImg"/>
-        </div>
-    </div>
+  <div class="new">
+    {{> new_person }}
+  </div>
+
+  {{#if email_exists}}
+  <div class="form">
+    {{> details}}
+  </div>
+  {{/if}}
+
+  <div class="Meetup">
+    <h1>Attending</h1>
+    {{#each people}}
+      {{> person}}
+    {{/each}}
+  </div>
 </template>
 
-
-<template name="initial">
-    <div id="initial" class="pane" style="display:none">
-        <table>
-            <tr>
-                <td>
-                  <div>
-                    <label for="first_name">First:</label><br />
-                    <img src="images/input_left.gif" alt="" /><input type="text" id="first_name" value="" class="textinput" autocomplete="off" /><img src="images/input_right.gif" alt="" />
-                  </div>
-                </td>
-                <td>&nbsp;</td>
-                <td>
-                  <div>
-                    <label for="last_name">Last:</label><br />
-                    <img src="images/input_left.gif" alt="" /><input type="text" id="last_name" value="" class="textinput" autocomplete="off" /><img src="images/input_right.gif" alt="" />
-                  </div>
-                </td>
-            </tr>
-        </table>
-        <div>
-            <label for="tags">Tags:</label><br />
-            <img src="images/input_left.gif" alt="" /><input type="text" id="tags" value="" class="textinput" autocomplete="off" /><img src="images/input_right.gif" alt="" />
-        </div>
-        <div>
-          <img src="images/button_left.jpg" alt="" class="buttonImg"/><input type="button" value="&lt;&lt; Oops!" onclick="WelcomeSystem.startOver();" class="buttonSubmit"/><img src="images/button_right.jpg" alt="" class="buttonImg"/>
-          <img src="images/button_left.jpg" alt="" class="buttonImg"/><input type="submit" value="Finish this up!" class="buttonSubmit"/><img src="images/button_right.jpg" alt="" class="buttonImg"/>
-        </div>
-    </div>
+<template name="person">
+  <div class="person">
+    <span class="name">{{name}}</span>
+  </div>
 </template>
 
-<template name="thanks">
-	<div id="thanks" class="pane" style="display:none">Thanks for showing up, <span id="moniker">dude</span>!</div>
+<template name="new_person">
+  <div class="new_person">
+    <label for="email">Email:</label>
+    <input id="email" type="text" 
+    {{#if email_exists}}
+      disabled="disabled"
+    {{/if}}/>
+
+  {{#unless email_exists}}
+    <input type="button" class="add" value="Get this party started!" />
+  {{/unless}}
+  {{#if email_exists}}
+    <input type="button" class="edit" value="edit email" />
+  {{/if}}
+  </div>
+</template>
+
+<template name="details">
+  <div class="details">
+    <label for="name">Name:</label>
+    <input id="name" type="text" />
+    </br>
+    <label for="about">About Me:</label>
+    <input id="about" type="text" />
+    <input type="button" class="add" value="Finish this up!" />
+  </div>
 </template>
