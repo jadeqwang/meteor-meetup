@@ -50,13 +50,20 @@ if (Meteor.isClient) {
 						date : -1
 					}
 				});
-				Events.update({
-					_id : event._id
-				}, {
-					$push : {
-						attending : person._id
-					}
-				});
+				var exists = false;
+				for(var i = 0; i < event.attendinglength && !exists; i++){
+					exists = event.attending[i] == person_id;
+				}
+				if(!exists){
+					Events.update({
+						_id : event._id
+					}, {
+						$push : {
+							attending : person._id
+						}
+					});
+					Meteor.call('printBadge', person._id);
+				}
 				// Events.insert({player_id: person._id});
 				document.getElementById("email").value = '';
 				alert("Thanks for showing up!")
@@ -76,6 +83,7 @@ if (Meteor.isClient) {
 			var email = document.getElementById("email").value;
 			var name = document.getElementById("name").value.trim();
 			var about = document.getElementById("about").value.trim();
+			
 			if (name.length == 0) {
 				alert("requires a name");
 				return;
@@ -97,6 +105,9 @@ if (Meteor.isClient) {
 					attending : person
 				}
 			});
+			
+			Meteor.call('printBadge', person);
+			
 			document.getElementById("email").value = '';
 			document.getElementById("name").value = '';
 			document.getElementById("about").value = '';
@@ -106,5 +117,27 @@ if (Meteor.isClient) {
 	};
 
 	// Events.insert({event: "event", date: new Date(), attending: []});
+
+	if (Meteor.is_server) {
+		Meteor.startup(function() {
+			Meteor.methods({
+				printBadge : function(person_id) {
+					var person = People.findOne({
+						_id : person_id
+					});
+					if (person) {
+						var sys = require('sys');
+						var exec = require('child_process').exec;
+						function puts(error, stdout, stderr) { sys.puts(stdout) };
+//						exec("badge -n '" + person.name + "' -a '" + person.about + "'", puts);
+						console.log(person.name + ' badge is sent to printer');
+						return true;
+					}
+					console.log('somebody sent an invalid person ID');
+					return false;
+				}
+			});
+		});
+	}
 
 }

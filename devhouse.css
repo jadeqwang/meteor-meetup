@@ -1,5 +1,7 @@
 /* CSS declarations go here */
-body {text-align: center; font-size: 24px; font-family: "Trebuchet MS" Verdana, Arial; color: #606060; background: white;}
+body {text-align: center; font-size: 24px; font-family: "Trebuchet MS" Verdana, Arial; 
+height: 100%;
+background: black url(http://meteor.com/universe.png) }
 body div div {margin-bottom: 10px;}
 div.pane {margin: 0px auto; width: 725px;}
 div.pane table {margin: 0px auto;}
@@ -16,16 +18,24 @@ input.text {width: 300px;}
 
 input, textarea {
 	font-family:Arial, Helvetica, sans-serif;
-	color:#404040;
+	background: #fff
 }
 label {
 	cursor:pointer;
 	font-family:"Trebuchet MS";
 	font-size: 36px;
-	color:#606060;
 	line-height:50px;
+	background: #fff
 }
 label.chosen {color:#333;}
+
+.name {
+	background: #fff
+}
+
+h1 {
+	background: #fff
+}
 
 /*Text inputs*/
 .textinput, .textinputHovered {
