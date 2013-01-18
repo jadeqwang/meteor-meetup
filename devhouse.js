@@ -55,13 +55,15 @@ if (Meteor.isClient) {
 					exists = event.attending[i] == person_id;
 				}
 				if(!exists){
-					Events.update({
-						_id : event._id
-					}, {
-						$push : {
-							attending : person._id
-						}
-					});
+					if (event) {
+						Events.update({
+							_id : event._id
+						}, {
+							$push : {
+								attending : person._id
+							}
+						});
+					}
 					Meteor.call('printBadge', person._id);
 				}
 				// Events.insert({player_id: person._id});
@@ -98,15 +100,18 @@ if (Meteor.isClient) {
 					date : -1
 				}
 			});
-			Events.update({
-				_id : event._id
-			}, {
-				$push : {
-					attending : person
-				}
-			});
 			
-			Meteor.call('printBadge', person);
+			if (event) {
+				Events.update({
+					_id : event._id
+				}, {
+					$push : {
+						attending : person
+					}
+				});
+				
+				Meteor.call('printBadge', person);
+			}
 			
 			document.getElementById("email").value = '';
 			document.getElementById("name").value = '';

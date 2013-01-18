@@ -37,6 +37,10 @@ h1 {
 	background: #fff
 }
 
+p {
+	background: #fff
+}
+
 /*Text inputs*/
 .textinput, .textinputHovered {
 	height:84px;
