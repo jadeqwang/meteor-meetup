@@ -25,6 +25,12 @@
     {{#each people}}
       {{> person}}
     {{/each}}
+
+    {{#unless people}}
+    <div class="person">
+      <p>Be the first to sign in</p>
+    </div>
+    {{/unless}}
   </div>
 </template>
 
@@ -58,6 +64,7 @@
     </br>
     <label for="about">About Me:</label>
     <input id="about" type="text" />
+    </br>
     <input type="button" class="add" value="Finish this up!" />
   </div>
 </template>
