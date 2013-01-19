@@ -51,8 +51,8 @@ if (Meteor.isClient) {
 					}
 				});
 				var exists = false;
-				for(var i = 0; i < event.attendinglength && !exists; i++){
-					exists = event.attending[i] == person_id;
+				for(var i = 0; i < event.attending.length && !exists; i++){
+					exists = event.attending[i] == person._id;
 				}
 				if(!exists){
 					if (event) {
