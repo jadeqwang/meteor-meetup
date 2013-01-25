@@ -64,7 +64,8 @@ if (Meteor.isClient) {
 							}
 						});
 					}
-					Meteor.call('printBadge', person._id);
+					
+				printBadge(person._id);
 				}
 				document.getElementById("email").value = '';
 				alert("Thanks for showing up!")
@@ -109,7 +110,7 @@ if (Meteor.isClient) {
 					}
 				});
 				
-				Meteor.call('printBadge', person);
+				printBadge(person);
 			}
 			
 			document.getElementById("email").value = '';
@@ -118,85 +119,140 @@ if (Meteor.isClient) {
 			Session.set("email", false);
 			alert("Thanks for showing up!");
 		}
-	};
+	}
 
-	// Events.insert({event: "event", date: new Date(), attending: []});
-
-	if (Meteor.is_server) {
-		Meteor.startup(function() {
-			Meteor.methods({
-				printBadge : function(person_id) {
+		function printBadge(person_id) {
 					console.log('somebody is trying to print');
 					var person = People.findOne({
 						_id : person_id
 					});
 					if (person) {
-						var DYMO = require('./DYMO.Label.Framework.latest.js');
 			            try
 			            {
 			                // open label
 			                var labelXml = '<?xml version="1.0" encoding="utf-8"?>\
-			                	<DieCutLabel Version="8.0" Units="twips">\
-			                <PaperOrientation>Landscape</PaperOrientation>\
-			                <Id>Address</Id>\
-			                <PaperName>30252 Address</PaperName>\
-			                <DrawCommands>\
-			                  <RoundRectangle X="0" Y="0" Width="1581" Height="5040" Rx="270" Ry="270"/>\
-			                </DrawCommands>\
-			                <ObjectInfo>\
-			                  <TextObject>\
-			                    <Name>name</Name>\
-			                    <ForeColor Alpha="255" Red="0" Green="0" Blue="0"/>\
-			                    <BackColor Alpha="0" Red="255" Green="255" Blue="255"/>\
-			                    <LinkedObjectName></LinkedObjectName>\
-			                    <Rotation>Rotation0</Rotation>\
-			                    <IsMirrored>False</IsMirrored>\
-			                    <IsVariable>True</IsVariable>\
-			                    <HorizontalAlignment>Left</HorizontalAlignment>\
-			                    <VerticalAlignment>Top</VerticalAlignment>\
-			                    <TextFitMode>ShrinkToFit</TextFitMode>\
-			                    <UseFullFontHeight>True</UseFullFontHeight>\
-			                    <Verticalized>False</Verticalized>\
-			                    <StyledText>\
-			                      <Element>\
-			                        <String>Click here to enter text</String>\
-			                        <Attributes>\
-			                          <Font Family="Lucida Grande" Size="13" Bold="False" Italic="False" Underline="False" Strikeout="False"/>\
-			                          <ForeColor Alpha="255" Red="170" Green="170" Blue="170"/>\
-			                        </Attributes>\
-			                      </Element>\
-			                    </StyledText>\
-			                  </TextObject>\
-			                  <Bounds X="331.2" Y="226.7449" Width="4421.436" Height="641.9303"/>\
-			                </ObjectInfo>\
-			                <ObjectInfo>\
-			                  <TextObject>\
-			                    <Name>things</Name>\
-			                    <ForeColor Alpha="255" Red="0" Green="0" Blue="0"/>\
-			                    <BackColor Alpha="0" Red="255" Green="255" Blue="255"/>\
-			                    <LinkedObjectName></LinkedObjectName>\
-			                    <Rotation>Rotation0</Rotation>\
-			                    <IsMirrored>False</IsMirrored>\
-			                    <IsVariable>True</IsVariable>\
-			                    <HorizontalAlignment>Left</HorizontalAlignment>\
-			                    <VerticalAlignment>Top</VerticalAlignment>\
-			                    <TextFitMode>None</TextFitMode>\
-			                    <UseFullFontHeight>True</UseFullFontHeight>\
-			                    <Verticalized>False</Verticalized>\
-			                    <StyledText>\
-			                      <Element>\
-			                        <String>Click here to enter text</String>\
-			                        <Attributes>\
-			                          <Font Family="Lucida Grande" Size="13" Bold="False" Italic="False" Underline="False" Strikeout="False"/>\
-			                          <ForeColor Alpha="255" Red="170" Green="170" Blue="170"/>\
-			                        </Attributes>\
-			                      </Element>\
-			                    </StyledText>\
-			                  </TextObject>\
-			                  <Bounds X="331.2" Y="882.2928" Width="4461.899" Height="360.0301"/>\
-			                </ObjectInfo>\
-			              </DieCutLabel>';
-			                var label = DYMO.dymo.label.framework.openLabelXml(labelXml);
+<DieCutLabel Version="8.0" Units="twips">\
+  <PaperOrientation>Landscape</PaperOrientation>\
+  <Id>NameBadgeTag</Id>\
+  <PaperName>30365 Name Badge Card - offset</PaperName>\
+  <DrawCommands>\
+    <Path>\
+      <Line X1="3240" Y1="0" X2="3240" Y2="5040"/>\
+      <LineTo X="270" Y="5040"/>\
+      <Arc CenterX="185" CenterY="5040" Radius="85" StartAngle="0" EndAngle="90"/>\
+      <LineTo X="0" Y="4955"/>\
+      <LineTo X="0" Y="85"/>\
+      <LineTo X="185" Y="85"/>\
+      <Arc CenterX="185" CenterY="0" Radius="85" StartAngle="-90" EndAngle="0"/>\
+      <LineTo X="3240" Y="0"/>\
+    </Path>\
+  </DrawCommands>\
+  <ObjectInfo>\
+    <TextObject>\
+      <Name>name</Name>\
+      <ForeColor Alpha="255" Red="0" Green="0" Blue="0"/>\
+      <BackColor Alpha="0" Red="255" Green="255" Blue="255"/>\
+      <LinkedObjectName></LinkedObjectName>\
+      <Rotation>Rotation0</Rotation>\
+      <IsMirrored>False</IsMirrored>\
+      <IsVariable>True</IsVariable>\
+      <HorizontalAlignment>Center</HorizontalAlignment>\
+      <VerticalAlignment>Middle</VerticalAlignment>\
+      <TextFitMode>ShrinkToFit</TextFitMode>\
+      <UseFullFontHeight>True</UseFullFontHeight>\
+      <Verticalized>False</Verticalized>\
+      <StyledText>\
+        <Element>\
+          <String>Click here to enter text</String>\
+          <Attributes>\
+            <Font Family="Helvetica" Size="32" Bold="False" Italic="False" Underline="False" Strikeout="False"/>\
+            <ForeColor Alpha="255" Red="170" Green="170" Blue="170"/>\
+          </Attributes>\
+        </Element>\
+      </StyledText>\
+    </TextObject>\
+    <Bounds X="468" Y="202.2129" Width="4259.223" Height="938.0584"/>\
+  </ObjectInfo>\
+  <ObjectInfo>\
+    <TextObject>\
+      <Name>things</Name>\
+      <ForeColor Alpha="255" Red="0" Green="0" Blue="0"/>\
+      <BackColor Alpha="0" Red="255" Green="255" Blue="255"/>\
+      <LinkedObjectName></LinkedObjectName>\
+      <Rotation>Rotation0</Rotation>\
+      <IsMirrored>False</IsMirrored>\
+      <IsVariable>True</IsVariable>\
+      <HorizontalAlignment>Center</HorizontalAlignment>\
+      <VerticalAlignment>Middle</VerticalAlignment>\
+      <TextFitMode>ShrinkToFit</TextFitMode>\
+      <UseFullFontHeight>True</UseFullFontHeight>\
+      <Verticalized>False</Verticalized>\
+      <StyledText>\
+        <Element>\
+          <String>Click here to enter text</String>\
+          <Attributes>\
+            <Font Family="Lucida Grande" Size="18" Bold="False" Italic="False" Underline="False" Strikeout="False"/>\
+            <ForeColor Alpha="255" Red="170" Green="170" Blue="170"/>\
+          </Attributes>\
+        </Element>\
+      </StyledText>\
+    </TextObject>\
+    <Bounds X="468" Y="1230.101" Width="4177.463" Height="600"/>\
+  </ObjectInfo>\
+  <ObjectInfo>\
+    <TextObject>\
+      <Name>TEXT</Name>\
+      <ForeColor Alpha="255" Red="0" Green="0" Blue="0"/>\
+      <BackColor Alpha="0" Red="255" Green="255" Blue="255"/>\
+      <LinkedObjectName></LinkedObjectName>\
+      <Rotation>Rotation0</Rotation>\
+      <IsMirrored>False</IsMirrored>\
+      <IsVariable>False</IsVariable>\
+      <HorizontalAlignment>Right</HorizontalAlignment>\
+      <VerticalAlignment>Top</VerticalAlignment>\
+      <TextFitMode>None</TextFitMode>\
+      <UseFullFontHeight>True</UseFullFontHeight>\
+      <Verticalized>False</Verticalized>\
+      <StyledText>\
+        <Element>\
+          <String>Meteor DevShop 0</String>\
+          <Attributes>\
+            <Font Family="Helvetica" Size="13" Bold="True" Italic="False" Underline="False" Strikeout="False"/>\
+            <ForeColor Alpha="255" Red="0" Green="0" Blue="0"/>\
+          </Attributes>\
+        </Element>\
+      </StyledText>\
+    </TextObject>\
+    <Bounds X="1070.362" Y="2473.069" Width="3648.934" Height="359.1582"/>\
+  </ObjectInfo>\
+  <ObjectInfo>\
+    <TextObject>\
+      <Name>TEXT_1</Name>\
+      <ForeColor Alpha="255" Red="0" Green="0" Blue="0"/>\
+      <BackColor Alpha="0" Red="255" Green="255" Blue="255"/>\
+      <LinkedObjectName></LinkedObjectName>\
+      <Rotation>Rotation0</Rotation>\
+      <IsMirrored>False</IsMirrored>\
+      <IsVariable>False</IsVariable>\
+      <HorizontalAlignment>Left</HorizontalAlignment>\
+      <VerticalAlignment>Top</VerticalAlignment>\
+      <TextFitMode>ShrinkToFit</TextFitMode>\
+      <UseFullFontHeight>True</UseFullFontHeight>\
+      <Verticalized>False</Verticalized>\
+      <StyledText>\
+        <Element>\
+          <String>____________________________________</String>\
+          <Attributes>\
+            <Font Family="Lucida Grande" Size="13" Bold="False" Italic="False" Underline="False" Strikeout="False"/>\
+            <ForeColor Alpha="255" Red="0" Green="0" Blue="0"/>\
+          </Attributes>\
+        </Element>\
+      </StyledText>\
+    </TextObject>\
+    <Bounds X="468" Y="2207.854" Width="4327.707" Height="353.8872"/>\
+  </ObjectInfo>\
+</DieCutLabel>';
+			                var label = dymo.label.framework.openLabelXml(labelXml);
 
 			                // set label text
 			                label.setObjectText("name", person.name);
@@ -204,7 +260,7 @@ if (Meteor.isClient) {
 			                
 			                // select printer to print on
 			                // for simplicity sake just use the first LabelWriter printer
-			                var printers = DYMO.dymo.label.framework.getPrinters();
+			                var printers = dymo.label.framework.getPrinters();
 			                if (printers.length == 0)
 			                    throw "No DYMO printers are installed. Install DYMO printers.";
 
@@ -234,9 +290,6 @@ if (Meteor.isClient) {
 					console.log('somebody sent an invalid person ID');
 					return false;
 				}
-			});
-		});
-		
 	}
 
-}
+	// Events.insert({event: "event", date: new Date(), attending: []});

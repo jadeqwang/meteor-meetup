@@ -1,10 +1,17 @@
 <head>
   <title>Meteor Meetup</title>
+  <script src="./DYMO.Label.Framework.latest.js" type="text/javascript" charset="UTF-8"> </script>
 </head>
 
 <body>
-  <div id="outer">
-    {{> Meetup}}
+  <div class="container">
+    <div class="row">
+      <h1 style="font-size:100px;color:#fafafa;">Meteor DevShop 0</h1>
+      <hr>
+      <div id="outer">
+        {{> Meetup}}
+      </div>
+    </div>
   </div>
 </body>
 
@@ -21,7 +28,9 @@
   {{/if}}
 
   <div class="Meetup">
-    <h1>Attending</h1>
+    <br>
+    <h1></h1>
+    <center><h3 style="color:#fafafa;">Now go inside and meet..</h3></center>
     {{#each people}}
       {{> person}}
     {{/each}}
@@ -36,23 +45,25 @@
 
 <template name="person">
   <div class="person">
-    <span class="name">{{name}}</span>
+    <ul class="inline">
+    <li><p class="name" style="color:#ededed;">{{name}}</p></li>
+    </ul>
   </div>
 </template>
 
 <template name="new_person">
   <div class="new_person">
-    <label for="email">Email:</label>
+    <label style="#fafafa;"for="email">Email:</label>
     <input id="email" type="text" 
     {{#if email_exists}}
       disabled="disabled"
     {{/if}}/>
 
   {{#unless email_exists}}
-    <input type="button" class="add" value="Get this party started!" />
+    <center><input type="button" class="add btn btn-large btn-success" value="I'm Here!" /></center>
   {{/unless}}
   {{#if email_exists}}
-    <input type="button" class="edit" value="edit email" />
+    <!-- <input type="button" class="edit btn btn-large" value="Change email" /> -->
   {{/if}}
   </div>
 </template>
@@ -65,6 +76,6 @@
     <label for="about">About Me:</label>
     <input id="about" type="text" />
     </br>
-    <input type="button" class="add" value="Finish this up!" />
+    <center><input type="button" class="add btn btn-large btn-success" value="Finish this up!" /></center>
   </div>
 </template>

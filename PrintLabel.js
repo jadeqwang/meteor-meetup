@@ -1,30 +1,30 @@
-////----------------------------------------------------------------------------
-////
-////  $Id: PreviewAndPrintLabel.js 11419 2010-04-07 21:18:22Z vbuzuev $ 
-////
-//// Project -------------------------------------------------------------------
-////
-////  DYMO Label Framework
-////
-//// Content -------------------------------------------------------------------
-////
-////  DYMO Label Framework JavaScript Library Samples: Print label
-////
-////----------------------------------------------------------------------------
-////
-////  Copyright (c), 2010, Sanford, L.P. All Rights Reserved.
-////
-////----------------------------------------------------------------------------
-//
-//
-//(function()
-//{
+// //----------------------------------------------------------------------------
+// //
+// //  $Id: PreviewAndPrintLabel.js 11419 2010-04-07 21:18:22Z vbuzuev $ 
+// //
+// // Project -------------------------------------------------------------------
+// //
+// //  DYMO Label Framework
+// //
+// // Content -------------------------------------------------------------------
+// //
+// //  DYMO Label Framework JavaScript Library Samples: Print label
+// //
+// //----------------------------------------------------------------------------
+// //
+// //  Copyright (c), 2010, Sanford, L.P. All Rights Reserved.
+// //
+// //----------------------------------------------------------------------------
+
+
+// (function()
+// {
 //    // called when the document completly loaded
 //    function onload()
 //    {
 //        var textTextArea = document.getElementById('textTextArea');
 //        var printButton = document.getElementById('printButton');
-//
+
 //        // prints the label
 //        printButton.onclick = function()
 //        {
@@ -93,17 +93,17 @@
 //                </ObjectInfo>\
 //              </DieCutLabel>';
 //                var label = dymo.label.framework.openLabelXml(labelXml);
-//
+
 //                // set label text
 //                label.setObjectText("name", textTextArea.value);
 //                label.setObjectText("things", textTextArea.value);
-//                
+               
 //                // select printer to print on
 //                // for simplicity sake just use the first LabelWriter printer
 //                var printers = dymo.label.framework.getPrinters();
 //                if (printers.length == 0)
 //                    throw "No DYMO printers are installed. Install DYMO printers.";
-//
+
 //                var printerName = "DYMO";
 //                for (var i = 0; i < printers.length; ++i)
 //                {
@@ -114,10 +114,10 @@
 //                        break;
 //                    }
 //                }
-//                
+               
 //                if (printerName == "")
 //                    throw "No LabelWriter printers found. Install LabelWriter printer";
-//
+
 //                // finally print the label
 //                label.print(printerName);
 //            }
@@ -127,7 +127,7 @@
 //            }
 //        }
 //    };
-//
+
 //    // register onload event
 //    if (window.addEventListener)
 //        window.addEventListener("load", onload, false);
@@ -135,5 +135,5 @@
 //        window.attachEvent("onload", onload);
 //    else
 //        window.onload = onload;
-//
-//} ());
+
+// } ());
