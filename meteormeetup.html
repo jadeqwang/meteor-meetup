@@ -1,3 +1,4 @@
+<!-- METEOR DEVSHOP SIGN-IN APP || By Quebecisnice & David-bfg @Chez JJ -->
 <head>
   <title>Meteor Meetup</title>
   <script src="./DYMO.Label.Framework.latest.js" type="text/javascript" charset="UTF-8"> </script>
@@ -6,7 +7,8 @@
 <body>
   <div class="container">
     <div class="row">
-      <h1 style="font-size:100px;color:#fafafa;margin-top:75px;">Meteor DevShop 0</h1>
+      <h1 style="font-size:100px;margin-top:45px;">Meteor DevShop 0</h1>
+      <center><p style="#fafafa;"for="email">Sign in with your email address</p></center>
       <hr>
       <div id="outer">
         {{> Meetup}}
@@ -27,20 +29,6 @@
   </div>
   {{/if}}
 
-  <div class="Meetup">
-    <br>
-    <h1></h1>
-    <center><h3 style="color:#fafafa;">Now go inside and meet..</h3></center>
-    {{#each people}}
-      {{> person}}
-    {{/each}}
-
-    {{#unless people}}
-    <div class="person">
-      <p>Be the first to sign in</p>
-    </div>
-    {{/unless}}
-  </div>
 </template>
 
 <template name="person">
@@ -53,29 +41,36 @@
 
 <template name="new_person">
   <div class="new_person">
-    <center><p style="#fafafa;"for="email">Sign in with your email address</p></center>
-    <input id="email" type="text" 
+  <div class="line bottom30"> 
+    <label for="email">EMAIL</label> 
+      <input id="email" type="text" 
     {{#if email_exists}}
       disabled="disabled"
     {{/if}}/>
-
+  </div>
   {{#unless email_exists}}
-    <center><input type="button" class="add btn btn-large btn-success" value="I'm Here!" /></center>
+    <center><input type="button" class="add masthead btn btn-large btn-success" value="I'm Here!" /></center>
   {{/unless}}
   {{#if email_exists}}
-    <!-- <input type="button" class="edit btn btn-large" value="Change email" /> -->
+    
   {{/if}}
-  </div>
 </template>
 
 <template name="details">
   <div class="details">
-    <label for="name">Name:</label>
-    <input id="name" type="text" />
-    </br>
-    <label for="about">About Me:</label>
-    <input id="about" type="text" />
-    </br>
+    <div class="line bottom30"> 
+      <label for="name">NAME</label> 
+      <input id="name" type="text" />
+    </div>
+    <div class="line bottom30"> 
+      <label for="about">ABOUT ME</label> 
+      <input id="about" type="text" />
+    </div>
+  </div>
+
+
+    
+
     <center><input type="button" class="add btn btn-large btn-success" value="Finish this up!" /></center>
   </div>
 </template>

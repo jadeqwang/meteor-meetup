@@ -1,3 +1,5 @@
+// METEOR DEVSHOP SIGN-IN APP || By Quebecisnice & David-bfg @Chez JJ
+
 People = new Meteor.Collection("people");
 Events = new Meteor.Collection("events");
 
