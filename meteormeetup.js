@@ -70,7 +70,7 @@ if (Meteor.isClient) {
 				printBadge(person._id);
 				}
 				document.getElementById("email").value = '';
-				alert("Thanks for showing up!")
+				alert("Welcome to the future! Take your name tag to proceed.")
 			} else {
 				Session.set("email", true);
 			}
