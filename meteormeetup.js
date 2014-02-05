@@ -217,7 +217,7 @@ if (Meteor.isClient) {
       <Verticalized>False</Verticalized>\
       <StyledText>\
         <Element>\
-          <String>Meteor DevShop 2</String>\
+          <String>Meteor Devshop</String>\
           <Attributes>\
             <Font Family="Helvetica" Size="10" Bold="True" Italic="False" Underline="False" Strikeout="False"/>\
             <ForeColor Alpha="255" Red="0" Green="0" Blue="0"/>\
