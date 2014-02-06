@@ -8,12 +8,16 @@ font-style: italic;
 background: url() no-repeat;
 margin: 0;
 padding: 0;
-padding-left: 45px;
+/*padding-left: 45px;*/
+/*margin-left: 25px;*/
+text-align: center;
 font-family: Arial, sans-serif;
-font-weight: normal;
+font-weight: bold;
 }
 
-
+#outer {
+  max-width: 50%;
+}
 
 
 .c-1, .c-2, .c-3, .c-4, .c-5, .c-6, .c-7, .c-8, .c-9, .c-10, .c-11, .c-12 { float: left; }

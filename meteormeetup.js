@@ -303,6 +303,6 @@ if (Meteor.isClient) {
 
 if (Meteor.isServer) {
 	if (!Events.findOne({}, {})) {
-		Events.insert({event: "Meteor DevShop 2", date: new Date(), attending: []});
+		Events.insert({event: "Meteor Devshop London", date: new Date(), attending: []});
 	}
 }
