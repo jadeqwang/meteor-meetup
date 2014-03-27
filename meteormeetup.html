@@ -43,9 +43,10 @@
   <div class="line bottom30"> 
     <label for="email">EMAIL</label> 
       <input id="email" type="text" 
-    {{#if email_exists}}
-      disabled="disabled"
-    {{/if}}/>
+        {{#if email_exists}}
+          disabled="disabled"
+        {{/if}}
+      />
   </div>
   {{#unless email_exists}}
     <center><input type="button" class="add masthead btn btn-large btn-success" value="I'm Here!" /></center>
@@ -66,10 +67,8 @@
       <input id="about" type="text" />
     </div>
   </div>
-
-
-    
-
-    <center><input type="button" class="add btn btn-large btn-success" value="I'm Here! Print me." /></center>
+    <center>
+      <input type="button" class="add btn btn-large btn-success" value="I'm Here! Print me." />
+    </center>
   </div>
 </template>
