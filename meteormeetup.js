@@ -36,16 +36,9 @@ if (Meteor.isClient) {
 
 	Template.new_person.events = {
 		'click input.add' : function() {
-			Session.set("email", false);
-			var email = document.getElementById("email").value;
-			var re = /^\s*[\w\-\+_]+(\.[\w\-\+_]+)*\@[\w\-\+_]+\.[\w\-\+_]+(\.[\w\-\+_]+)*\s*$/;
-			if (!re.test(email)) {
-				alert("invalid email format");
-				return;
-			}
-			var person = People.findOne({
-				email : email
-			});
+			verifyEmail(document.getElementById("email").value);
+
+			var person = People.findOne({ email : email });
 			if (person) {
 				var event = Events.findOne({}, {
 					sort : {
@@ -103,12 +96,20 @@ if (Meteor.isClient) {
                                   document.getElementById("name").value.trim(), 
                                   document.getElementById("about").value.trim());
         checkinAttendee(event, person);
-
       //clear values
       document.getElementById("email").value = '';
       document.getElementById("name").value = '';
       document.getElementById("about").value = '';  
-    }
+      }
+  }
+}
+
+function verifyEmail (email) {
+  Session.set("email", false);
+  var re = /^\s*[\w\-\+_]+(\.[\w\-\+_]+)*\@[\w\-\+_]+\.[\w\-\+_]+(\.[\w\-\+_]+)*\s*$/;
+  if (!re.test(email)) {
+    alert("invalid email format");
+    return;
   }
 }
 
